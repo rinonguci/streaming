@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    WebCam:
+    <video id="myvideo"></video>
+    <script src="client.js"></script>
+    <script>
+      var constraints = { audio: true, video: { width: 1280, height: 720 } };
+      var mediaRecorder;
+      var chunks = [];
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (mediaStream) {
+          var video = document.querySelector("video");
+          video.srcObject = mediaStream;
+          mediaRecorder = new MediaRecorder(mediaStream);
+          video.onloadedmetadata = function (e) {
+            video.play();
+          };
+          mediaRecorder.ondataavailable = function (e) {
+            //console.log('Data', e.data);
+            ws.send(e.data);
+          };
+          mediaRecorder.start(2000);
+        })
+        .catch(function (err) {
+          console.log(err.name + ": " + err.message);
+        });
+    </script>
+  </body>
+</html>

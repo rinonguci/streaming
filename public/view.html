@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <video id="video-streaming" controls></video>
+    <script src="client.js"></script>
+    <script>
+      getHttpStreaming();
+
+      function getHttpStreaming() {
+        console.log("Getting streaming");
+        var d = new Date();
+        var n = d.getTime();
+        audio = document.getElementById("video-streaming");
+        audio.src = "http://localhost:3000/api/video?" + n;
+        audio.load();
+        audio.play();
+      }
+    </script>
+  </body>
+</html>
