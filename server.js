@@ -24,8 +24,8 @@ app.get("/api/video", function (req, res) {
   console.log("Http client connected: Streaming!");
 });
 
-app.listen(3000);
-console.log("HTTP Service: http://localhost:3000/");
+app.listen(3900);
+console.log("HTTP Service: http://localhost:3900/");
 
 const wss = new webSocket.Server({ port: 8080 });
 console.log("Web Socket Service: ws://localhost:8080/");
@@ -112,7 +112,7 @@ const interval = setInterval(function ping() {
     ws.isAlive = false;
     ws.ping(noop);
   });
-}, 30000);
+}, 39000);
 
 wss.on("close", function close() {
   clearInterval(interval);
